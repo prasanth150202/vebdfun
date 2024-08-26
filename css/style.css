@@ -108,7 +108,7 @@ button{
     .content1 {
         flex-direction: column; 
         width: 300px;
-        height: 90%; /* Stack child elements vertically */
+        height: 85%; /* Stack child elements vertically */
     }
 
     .popup-image-container {
@@ -126,6 +126,10 @@ button{
         max-width: none; /* Remove maximum width restriction on mobile */
         margin: 20px 0; /* Adjust margin for mobile */
     }
+
+    .modal input{
+        margin-bottom: -2px;
+            }
 }
 
 .modal button[type="submit"] {
