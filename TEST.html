@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book A Consultation</title>
+    <style>
+
+        
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        .modal h1{
+            color: #767af3;
+            font-weight: 600;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .content1 {
+            display: flex;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 760px;
+            position: relative;
+            gap: 20px; /* Adds spacing between image and text */
+            color: #0a4c44;
+        }
+
+        .modal input {
+            margin-bottom: 10%;
+        }   
+        .modal label{
+            font-size: 30px
+        }
+        .modal  input{
+            height: 5vh;
+            font-size: 20px;
+        }
+        @media(max-width:480px){
+            .modal input {
+                margin-bottom: 20%;
+            }
+        }
+        button{
+            font-size: 20px;
+        }
+        .popup-image-container {
+            flex: 1; /* Allows the image container to grow equally */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .popup-image {
+            max-width: 100%; /* Ensure image does not exceed container width */
+            height: 550px; /* Maintain aspect ratio */
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .popup-text-container {
+            flex: 1; /* Allows the text container to grow equally */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .close-button {
+            color: #fe0606;
+            font-size: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #popup-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .imgcon {
+            width: 100%; /* Make the image container responsive */
+            max-width: 400px; /* Set a maximum width */
+            border-radius: 20px;
+            overflow: hidden; /* Ensure image fits within container */
+        }
+
+        /* Media Query for Mobile Devices */
+        @media (max-width: 768px) {
+            .content1 {
+                flex-direction: column; 
+                width: 300px;
+                height: 90%; /* Stack child elements vertically */
+            }
+
+            .popup-image-container {
+                flex: 1;
+                justify-content: center; /* Center image horizontally in the container */
+                padding: 0 20px; /* Add horizontal padding if needed */
+            }
+
+            .popup-image {
+                display: none; /* Maintain aspect ratio */
+            }
+
+            .imgcon {
+                width: 100%; /* Make image container full width on mobile */
+                max-width: none; /* Remove maximum width restriction on mobile */
+                margin: 20px 0; /* Adjust margin for mobile */
+            }
+        }
+
+        .modal button[type="submit"] {
+            padding: 10px;
+            background: #767af3 ;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .error-message {
+    color: red;
+    display: none; /* Hidden by default */
+    font-size: 0.875em;
+}
+
+    </style>
+</head>
+<body>
+
+<a href="#popup-box" >hi</a>
+
+<div id="popup-box" class="modal">    
+    <div class="content1">
+        <div class="imgcon">
+            <img src="img/woman-interacting-with-money.jpg" alt="Popup Image" class="popup-image">
+        </div>
+        <div class="popup-text-container">
+            <h1>Get In Touch</h1>
+            <a href="#" class="close-button" id="closeModal">&times;</a>
+            
+            <form class="row g-3 needs-validation" method="post" id="popup-form" novalidate>
+                <!-- Name Field -->
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter Your Name" name="Name" required>
+                <span class="error-message" id="name-error">Please enter your name.</span>
+                
+                <!-- Email Field -->
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Your Email" name="Email Address" required>
+                <span class="error-message" id="email-error">Please enter a valid email address.</span>
+                
+                <!-- Phone Number Field -->
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" placeholder="Enter Your Phone Number" name="Mobile" id="phone" minlength="10" maxlength="10" required>
+                <span class="error-message" id="phone-error">Please enter a valid phone number with 10 digits.</span>
+
+                <!-- Industry Field -->
+                <label for="industry" class="form-label">Industry</label>
+                <input type="text" id="industry" class="form-control" placeholder="Enter Your Industry" name="Industry" required>
+                <span class="error-message" id="industry-error">Please enter your industry.</span>
+                
+                <button type="submit" value="Submit" id="submitButton" data-mdb-ripple-init>Submit form</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('popup-box');
+    const closeModal = document.getElementById('closeModal');
+
+    // Open the modal if the hash in the URL matches the modal ID
+    if (window.location.hash === '#popup-box') {
+        modal.style.display = 'flex';
+    }
+
+    // Close the modal
+    closeModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.style.display = 'none';
+        window.history.replaceState(null, '', window.location.pathname); // Remove the hash from the URL
+    });
+
+    // Check hash change to open the modal
+    window.addEventListener('hashchange', () => {
+        if (window.location.hash === '#popup-box') {
+            modal.style.display = 'flex';
+        }
+    });
+
+    const forms = document.querySelectorAll('.needs-validation');
+    forms.forEach((form) => {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            let isValid = true;
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(msg => msg.style.display = 'none');
+
+            // Check validity of each field
+            const name = document.getElementById('name');
+            if (!name.value.trim()) {
+                document.getElementById('name-error').style.display = 'block';
+                isValid = false;
+            }
+
+            const email = document.getElementById('email');
+            if (!email.validity.valid || !validateEmail(email.value)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            }
+
+            const phone = document.getElementById('phone');
+            if (!phone.value.trim() || phone.value.length !== 10 || !/^\d{10}$/.test(phone.value)) {
+                document.getElementById('phone-error').style.display = 'block';
+                isValid = false;
+            }
+
+            const industry = document.getElementById('industry');
+            if (!industry.value.trim()) {
+                document.getElementById('industry-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                form.classList.add('was-validated');
+                return;
+            }
+
+            modal.style.display = 'none';
+            document.getElementById('submitButton').disabled = true;
+            const formData = new FormData(event.target);
+
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycby3qmIu9OuriImTKPRupw4P1gH0fWM8a2f7ulBmVY79fQQSO0RNJx1-NDn3AkeSzioA/exec", { 
+                    method: 'POST', 
+                    body: formData 
+                });
+                const data = await response.json();
+
+                document.getElementById('submitButton').disabled = false;
+                if (data.result === "success") {
+                    form.reset();
+                    window.location.href = 'thankyou.html';
+                } else {
+                    document.querySelector('.modal-backdrop').classList.remove('show');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2500);
+                }
+            } catch (error) {
+                document.getElementById('submitButton').disabled = false;
+                form.reset();
+                alert('An error occurred: ' + error.message);
+            }
+        }, false);
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email.toLowerCase());
+    }
+});
+
+
+</script>
+
+</body>
+</html>
