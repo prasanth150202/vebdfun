@@ -4,14 +4,108 @@
     --light: #EFF5FF;
     --dark: #767af3;
 }
+
+.videocont {
+    font-family: 'Montserrat', sans-serif;
+    display: grid;
+
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+}
+
+.video-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-item {
+    position: relative;
+    width: 300px; /* Adjust based on desired size */
+    height: 500px; /* Height for 9:16 aspect ratio */
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.video-item video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    display: none; /* Hidden by default */
+}
+
+.video-item.playing img {
+    opacity: 0;
+}
+
+.video-item.playing video {
+    display: block; /* Show the video when active */
+}
+ .slider img {
+    width: 100px;
+    
+    animation: scroll 60s linear infinite;
+  }
+  
+  .slide-track {
+    width: 60%;
+    display: flex;
+    gap: 3em;
+    overflow: hidden;
+   
+  }
+  
+  .slider {
+    margin-top: -70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 8em 2em;
+  }
+  
+  @keyframes scroll {
+    0% {transform: translateX(0);}
+    100% {transform: translatex(-1000%)}
+  }
+
+  @media (max-width:768px) {
+    .slide-track {
+        width: 100%;
+        display: flex;
+        gap: 3em;
+        overflow: hidden;
+       
+      }
+    
+  }
 body {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
 }
 
-h1, h2, h3, h4, h5, h6 , p  {
+h1, h2, h3, h4, h5, h6   {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
+}
+p{
+    font-family: "Montserrat", sans-serif;
 }
 .unbold {
     font-weight: 700 ; /* or a specific value like 400 */
